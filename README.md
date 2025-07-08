@@ -10,17 +10,21 @@ A full-stack dashboard for ingesting, analyzing, and visualizing cybersecurity t
 - 📊 Visualizes real-time stats by threat category and severity
 - 📂 Browse and filter threat records
 - 📦 Fully containerized with Docker and Docker Compose
+- 🧠 Analyze threat descriptions using ML to auto-classify them
 
 ---
 
 ## 💡 Why This Stack?
 
-| Component      | Technology        |Justification                                                                
-|----------------|-------------------|--------------------------------------------------------------------------|
-| Frontend       | React.js          | Fast, reactive UI framework ideal for SPAs and real-time dashboards 
-| Backend API    | Flask + Python    | Lightweight, easy-to-write APIs with rich ecosystem support (ML, Pandas, etc.)
-| Database       | MongoDB           | Flexible NoSQL schema handles semi-structured cyber threat data well)
-| Containerization| Docker + Compose | Clean, reproducible, and platform-independent deployments
+| Component          | Technology           |Justification                                                                
+|--------------------|----------------------|------------------------------------------------------------------------|
+| Frontend           | React.js             | Fast, reactive UI framework ideal for SPAs and real-time dashboards 
+| Backend API        | Flask + Python       | Lightweight, easy-to-write APIs with rich ecosystem support (ML, Pandas, etc.)
+| Database           | MongoDB              | Flexible NoSQL schema handles semi-structured cyber threat data well)
+| ML Model           | ExtraTreesClassifier | Fast, robust ensemble model that handles high-dimensional TF-IDF vectors efficiently
+| Feature Extraction | TF-IDF Vectorizer    | Converts text into sparse vectors, capturing term importance without deep learning overhead   
+| Serialization      | Pickle               | Enables model saving/loading for seamless Flask API integration                              
+| Containerization   | Docker + Compose     | Clean, reproducible, and platform-independent deployments
 
 
 ## 🗂️ Project Structure
@@ -53,7 +57,7 @@ ThreatDashboard/
 
 ### 1. Clone the repo
 
-```bash
+```
 git clone <your-repo-url>
 cd ThreatDashboard
 ```
@@ -69,7 +73,7 @@ CSV_PATH=/app/data/cyber_threats.csv
 
 ### 3. Build & Run all services
 
-```bash
+```
 docker-compose up --build
 ```
 
@@ -84,7 +88,7 @@ This spins up:
 
 Inside the backend container, run:
 
-```bash
+```
 docker-compose exec backend bash
 python ingest.py
 ```
